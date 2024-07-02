@@ -3,14 +3,20 @@ main:
   - title: "ABOUT ME"
     url: /
 
+  # - title: "PUBLICATIONS"
+  #   url: /publications/
+
+  - title: "COUREWORK"
+    url: /coursework/
+
   - title: "TEACHING"
     url: /teaching/
 
-  - title: "PROJECTS"
+  - title: "RESEARCH & PROJECTS"
     url: /portfolio/
 
-  - title: "BLOG"
-    url: /year-archive/
+  # - title: "BLOG"
+  #   url: /year-archive/
 
   - title: "CV"
     url: /files/resume.pdf

@@ -5,9 +5,19 @@ permalink: /portfolio/
 author_profile: true
 ---
 
+<h2>Research</h2>
 {% include base_path %}
 
-
 {% for post in site.portfolio reversed %}
+{% if post.path contains "research" %}
 {% include archive-single.html %}
+{% endif %}
+{% endfor %}
+
+
+<h2>Project</h2>
+{% for post in site.portfolio reversed %}
+{% if post.path contains "project" %}
+{% include archive-single.html %}
+{% endif %}
 {% endfor %}
