@@ -8,7 +8,7 @@ date: 2024-01-22
 location: "Grinnell, IA"
 ---
 <!-- write an one sentence introduction -->
-This course was taught by Professor Charlie Curtsinger in the Spring of 2024 at Grinnell College.
+This [course](https://curtsinger.cs.grinnell.edu/teaching/2024S/CSC211) was taught by Professor Charlie Curtsinger in the Spring of 2024 at Grinnell College.
 This course covers the fundamental concepts of computer architecture and organization, providing students with a comprehensive understanding of hardware and system-level design.
 
 
