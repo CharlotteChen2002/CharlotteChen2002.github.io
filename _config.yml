@@ -8,14 +8,13 @@
 
 # Theme name
 theme: jekyll-theme-minimal
-title: CharlotteChen
 # Basic Site Settings
 locale: "en-US"
 title: "Haobo (Charlotte) Chen"
 title_separator: "-"
 name: &name "Haobo (Charlotte) Chen"
 description: &description "personal description"
-url: https://charlottechen.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url: https://charlottechen2002.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "CharlotteChen2002/CharlotteChen2002"
 
