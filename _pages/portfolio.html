@@ -14,8 +14,11 @@ author_profile: true
 {% endif %}
 {% endfor %}
 
+<br>
 
-<h2>Project</h2>
+<h2>Projects</h2>
+{% include base_path %}
+
 {% for post in site.portfolio reversed %}
 {% if post.path contains "project" %}
 {% include archive-single.html %}
