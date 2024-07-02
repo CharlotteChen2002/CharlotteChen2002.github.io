@@ -17,11 +17,14 @@ Research Interests
 
 News and Updates
 ======
-- **May 2024**: I started my research internship at the Univeristy of Minnesota, Twin Cities, working with Prof. Yang (Katie) Zhao and Prof. WenKai Guan on lower carbon datacenter operations research.
+- **May 2025**: I offically graduated from Grinnell College with a B.A. degree in Computer Science and Japanese.
 
 - **Sept 2024**: I started my undergraduate study at Columbia University, working towards the B.S. degree in Computer Engineering and minor in Biomedical Engineering.
 
-- **May 2025**: I offically graduated from Grinnell College with a B.A. degree in Computer Science and Japanese.
+- **May 2024**: I started my research internship at the Univeristy of Minnesota, Twin Cities, working with Prof. Yang (Katie) Zhao and Prof. WenKai Guan on lower carbon datacenter operations research.
+
+
+
 
 <!-- Site-wide configuration
 ------
