@@ -7,15 +7,19 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Electrical Engineering at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering with a minor in Biomedical Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/). Her research interests include computer architecture, hardware acceleration, and VLSI design.
+Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Electrical Engineering at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering with a minor in Biomedical Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
 
 Check out her blog [here](year-archive/).
+
+<hr>
 
 Research Interests
 ======
 - Computer Architecture
 - Hardware Acceleration
 - VLSI Design
+
+<hr>
 
 News and Updates
 ======
