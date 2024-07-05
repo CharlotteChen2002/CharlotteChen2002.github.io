@@ -9,8 +9,6 @@ redirect_from:
 
 Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Electrical Engineering at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering with a minor in Biomedical Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
 
-こんにちは！ 私の名前はシャーロット・チェンです。トランス女性で、彼女/彼女の代名詞を使用しています。コロンビア大学のフー財団工学応用科学部でコンピュータ工学を専攻し、生体医工学を副専攻している学部生です。
-
 Check out her blog [here](year-archive/).
 
 <hr>
