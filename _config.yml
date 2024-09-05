@@ -23,7 +23,7 @@ repository: "CharlotteChen2002/CharlotteChen2002"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar: "images/profile.png"
+  avatar: "profile.png"
   name: "Charlotte Chen"
   pronouns: "she/her"
   # bio: "Short biography for the left-hand"
