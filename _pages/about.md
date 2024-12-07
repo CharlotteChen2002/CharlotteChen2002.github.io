@@ -32,6 +32,13 @@ News and Updates
 
 - **May 2024**: I finished my study at Grinnell College and started my engineering study at Columbia University.
 
+<hr>
+
+Independent Exploration
+======
+- **CCMA**: I am learning towards clinical medical assistant certification.
+- **Opearting System**: I will start learning CS 162 Operating System sometime in 2025.
+
 
 
 
