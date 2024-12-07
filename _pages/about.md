@@ -37,7 +37,6 @@ News and Updates
 Independent Exploration
 ======
 - **CCMA**: I am learning towards clinical medical assistant certification.
-- **Opearting System**: I will start learning CS 162 Operating System sometime in 2025.
 
 
 
