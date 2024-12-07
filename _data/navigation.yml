@@ -1,6 +1,6 @@
 # main links links
 main:
-  - title: "ABOUT ME"
+  - title: "About Me"
     url: /
 
   # - title: "PUBLICATIONS"
@@ -9,10 +9,10 @@ main:
   # - title: "COUREWORK"
   #   url: /coursework/
 
-  - title: "TEACHING"
+  - title: "Teaching"
     url: /teaching/
 
-  - title: "RESEARCH & PROJECTS"
+  - title: "Research & Projects"
     url: /portfolio/
 
   # - title: "BLOG"

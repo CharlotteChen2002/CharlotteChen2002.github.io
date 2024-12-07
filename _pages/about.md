@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Computer Science at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
+Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Computer Engineering at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
 
 Check out her blog [here](http://charlottechen.blog).
 
@@ -17,15 +17,20 @@ Research Interests
 ======
 - Computer Architecture
 - Hardware Acceleration
-- VLSI Design
+- System on Chip (SoC) Design
+- Hardware Security
 
 <hr>
 
 News and Updates
 ======
-- **Sept 2024**: I started my undergraduate study at Columbia University, working towards the B.S. degree in Computer Engineering and minor in Biomedical Engineering.
+- **Dec 2024**: Finished my first semester at Columbia University.
+
+- **Sept 2024**: I started my undergraduate study at Columbia University, working towards the B.S. degree in Computer Engineering.
 
 - **May 2024**: I started my research internship at the Univeristy of Minnesota, Twin Cities, working with Prof. Yang (Katie) Zhao and Prof. WenKai Guan on lower carbon datacenter operations research.
+
+- **May 2024**: I finished my study at Grinnell College and started my engineering study at Columbia University.
 
 
 
