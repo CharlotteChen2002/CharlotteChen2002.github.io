@@ -26,7 +26,7 @@ News and Updates
 ======
 - **May 2025**: I participated my Grinnell College graduation ceremony.
 
-- **Dec 2024**: Finished my first semester at Columbia University.
+- **Feb 2025**: I started my research project at Columbia University, working with Prof. Sethumadhavan, Simha and Annie Peng on Jetson Nano power and performance analysis.
 
 - **Sept 2024**: I started my undergraduate study at Columbia University, working towards the B.S. degree in Computer Engineering.
 
