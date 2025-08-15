@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! **Charlotte Chen** is a third-year undergraduate in the Department of Computer Engineering at Columbia University. She will receive her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
+Welcome! **Charlotte Chen** is a forth-year undergraduate in the Department of Computer Engineering at Columbia University. She received her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
 
 Check out her blog [here](http://charlottechen.blog).
 
@@ -24,6 +24,8 @@ Research Interests
 
 News and Updates
 ======
+- **May 2025**: I participated my Grinnell College graduation ceremony.
+
 - **Dec 2024**: Finished my first semester at Columbia University.
 
 - **Sept 2024**: I started my undergraduate study at Columbia University, working towards the B.S. degree in Computer Engineering.
