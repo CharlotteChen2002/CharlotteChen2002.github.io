@@ -28,7 +28,6 @@ author:
   bio              : "Proud Trans Female in Academia"
   location         : "NY, USA"
   employer         : "Columbia University"
-  uri              : # URL
   email            : "hc3558@columbia.edu"
 
   # Academic websites
@@ -69,14 +68,11 @@ author:
   soundcloud       : # Username
   steam            : # Username
   telegram: https://t.me/CharlotteChen2002
-  tumblr           : # Username
   twitter: SagiriYamamoto
   vine             : # Username
-  weibo            : # Username
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : # Username
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
