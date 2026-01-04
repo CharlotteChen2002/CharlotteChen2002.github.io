@@ -1,5 +1,5 @@
 ---
-title: "CSEE 4824 / Computer Architecture"
+title: "CSEE 4824 - Computer Architecture"
 collection: teaching
 type: "Undergraduate / Graduate course"
 permalink: /teaching/2025-fall-computer-architecture

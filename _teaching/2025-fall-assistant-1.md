@@ -1,5 +1,5 @@
 ---
-title: "ELEN 3081 Circuit Analysis Laboratory"
+title: "ELEN 3081 - Circuit Analysis Laboratory"
 collection: teaching
 type: "Undergraduate course"
 permalink: /teaching/2025-fall-elen-e3201-lab
