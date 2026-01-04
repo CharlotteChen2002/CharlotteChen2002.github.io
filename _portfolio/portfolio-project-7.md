@@ -7,7 +7,7 @@ excerpt: "
 <span style='font-size: 0.9em;'>
 This project completes the full design, layout, and verification of a microprocessor core using the TSMC 65 nm (N65) technology. The work includes transistor-level schematic design, DRC- and LVS-clean layout, instruction decoder implementation using a pseudo-NMOS PLA, and end-to-end functional, timing, and power verification from extracted layout.
 </span>
-<a href='/files/ee4321_final_project.pdf' target='_blank' style='font-size: 0.9em;'>[report]</a>
+<a href='https://mg-04.github.io/articles/vlsi' target='_blank' style='font-size: 0.9em;'>[report]</a>
 <br/><br/>"
 collection: portfolio
 ---
