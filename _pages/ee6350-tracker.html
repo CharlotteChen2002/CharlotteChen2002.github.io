@@ -94,15 +94,48 @@ html[data-theme="dark"] {
 
 <div id="tracker-root"></div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     Firebase — cross-device sync
+     ───────────────────────────────────────────────────────────────
+     Setup (one-time):
+       1. Go to https://console.firebase.google.com and create a project.
+       2. Add a Web app inside that project (no hosting needed).
+       3. Copy the firebaseConfig object shown and paste it below.
+       4. In Firestore Database → Rules, set:
+            allow read, write: if true;
+          (fine for a personal tracker — data isn't sensitive)
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey:            "AIzaSyC7_2FWrQC6RUrZHMnqDYefwo_DNZTq4rU",
+    authDomain:        "my-page-99b69.firebaseapp.com",
+    projectId:         "my-page-99b69",
+    storageBucket:     "my-page-99b69.firebasestorage.app",
+    messagingSenderId: "992670582379",
+    appId:             "1:992670582379:web:90b41297ff7a3bdcc4d32e",
+  };
+
+  // Initialise only once (safe on hot-reload)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  // Expose db as a global so the Babel script below can reach it
+  window._trackerDb = firebase.firestore();
+  window._trackerDoc = window._trackerDb.collection("trackers").doc("elen6350_v1");
+</script>
+
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 {% raw %}
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
-const STORAGE_KEY = "elen6350_tracker_v1";
+const STORAGE_KEY  = "elen6350_tracker_v1";
+const trackerDoc   = window._trackerDoc;   // Firestore document reference
 
 /* Map status keys to CSS variable names */
 const STATUS = {
@@ -209,6 +242,30 @@ function StatCard({ label, value, color, active, onClick }) {
   );
 }
 
+// ─── Sync status pill ────────────────────────────────────────────
+const SYNC = {
+  init:   { label: "Connecting…", color: "var(--tr-muted)"    },
+  synced: { label: "Synced",      color: "var(--s-pass-text)" },
+  saving: { label: "Saving…",     color: "var(--s-prog-text)" },
+  error:  { label: "Sync error",  color: "var(--s-fail-text)" },
+  local:  { label: "Local only",  color: "var(--s-block-text)"},
+};
+
+function SyncPill({ status }) {
+  const s = SYNC[status] || SYNC.local;
+  return (
+    <span style={{
+      fontSize: "11px", fontFamily: "var(--tr-mono)",
+      color: s.color, opacity: 0.85,
+      border: `1px solid ${s.color}`,
+      borderRadius: "4px", padding: "2px 8px",
+      whiteSpace: "nowrap", userSelect: "none",
+    }}>
+      {s.label}
+    </span>
+  );
+}
+
 function VerificationTracker() {
   const [modules, setModules] = useState(() => {
     try {
@@ -221,9 +278,54 @@ function VerificationTracker() {
   const [newNote, setNewNote]     = useState("");
   const [editingNote, setEditingNote] = useState(null);
   const [filter, setFilter] = useState("ALL");
+  const [syncStatus, setSyncStatus] = useState(trackerDoc ? "init" : "local");
 
+  // Refs to coordinate Firestore ↔ state without infinite loops
+  const isRemoteUpdate = useRef(false);   // true while applying a remote snapshot
+  const saveTimer      = useRef(null);    // debounce handle
+
+  // ── Subscribe to Firestore on mount ──────────────────────────────
   useEffect(() => {
+    if (!trackerDoc) return;
+
+    const unsub = trackerDoc.onSnapshot(
+      (snap) => {
+        if (snap.exists) {
+          const remote = snap.data().modules;
+          isRemoteUpdate.current = true;
+          setModules(remote);
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(remote)); } catch {}
+        }
+        setSyncStatus("synced");
+      },
+      (_err) => {
+        setSyncStatus("error");
+      }
+    );
+
+    return () => unsub();
+  }, []);
+
+  // ── Write to Firestore (debounced) whenever modules change ───────
+  useEffect(() => {
+    // If this update came from Firestore itself, skip the write-back
+    if (isRemoteUpdate.current) {
+      isRemoteUpdate.current = false;
+      return;
+    }
+
+    // Always persist locally
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(modules)); } catch {}
+
+    if (!trackerDoc) return;
+
+    setSyncStatus("saving");
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      trackerDoc.set({ modules, savedAt: new Date().toISOString() })
+        .then(() => setSyncStatus("synced"))
+        .catch(() => setSyncStatus("error"));
+    }, 800);
   }, [modules]);
 
   const cycleStatus = (modIdx, stageKey) => {
@@ -285,6 +387,11 @@ function VerificationTracker() {
 
   return (
     <div style={{ color: "var(--tr-text)" }}>
+
+      {/* Sync status row */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "8px" }}>
+        <SyncPill status={syncStatus} />
+      </div>
 
       {/* Progress + stat cards */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", alignItems: "stretch" }}>
@@ -384,6 +491,7 @@ function VerificationTracker() {
       {/* Footer */}
       <p style={{ fontSize: "11px", color: "var(--tr-muted)", fontFamily: "var(--tr-mono)", marginTop: "8px" }}>
         {modules.length} modules · {totalCells} checkpoints
+        {trackerDoc ? " · synced via Firebase" : " · local only (Firebase not configured)"}
       </p>
     </div>
   );
