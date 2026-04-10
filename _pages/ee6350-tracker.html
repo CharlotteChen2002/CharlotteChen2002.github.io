@@ -265,50 +265,60 @@ function VerificationTracker() {
   const firebaseRef    = useRef(null);   // { setDoc, docRef } once Firebase loads
   const unsubRef       = useRef(null);   // onSnapshot unsubscribe handle
 
-  // ── Load Firebase asynchronously (never blocks initial render) ────
+  // ── Load Firebase asynchronously via script tags (no import()) ───
   useEffect(() => {
-    let cancelled = false;
+    var cancelled = false;
 
-    Promise.all([
-      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"),
-      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"),
-    ]).then(function(mods) {
-      var initializeApp = mods[0].initializeApp;
-      var getApps       = mods[0].getApps;
-      var getFirestore  = mods[1].getFirestore;
-      var collection    = mods[1].collection;
-      var doc           = mods[1].doc;
-      var onSnapshot    = mods[1].onSnapshot;
-      var setDoc        = mods[1].setDoc;
+    function loadScript(src) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
 
+    function initFirestore() {
       if (cancelled) return;
-
-      var app     = getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG);
-      var db      = getFirestore(app);
-      var docRef  = doc(collection(db, "trackers"), "elen6350_v1");
-
-      firebaseRef.current = { setDoc: setDoc, docRef: docRef };
-
-      unsubRef.current = onSnapshot(
-        docRef,
-        function(snap) {
-          if (cancelled) return;
-          if (snap.exists()) {
-            var remote = snap.data().modules;
-            isRemoteUpdate.current = true;
-            setModules(remote);
-            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(remote)); } catch(e) {}
-          }
-          setSyncStatus("synced");
-        },
-        function(_err) {
-          if (!cancelled) setSyncStatus("error");
+      try {
+        if (!window.firebase.apps.length) {
+          window.firebase.initializeApp(FIREBASE_CONFIG);
         }
-      );
-    }).catch(function(e) {
-      console.warn("Firebase failed — running in local-only mode.", e);
-      if (!cancelled) setSyncStatus("local");
-    });
+        var docRef = window.firebase.firestore()
+                       .collection("trackers").doc("elen6350_v1");
+        firebaseRef.current = { docRef: docRef };
+
+        unsubRef.current = docRef.onSnapshot(
+          function(snap) {
+            if (cancelled) return;
+            if (snap.exists) {
+              var remote = snap.data().modules;
+              isRemoteUpdate.current = true;
+              setModules(remote);
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(remote)); } catch(e) {}
+            }
+            setSyncStatus("synced");
+          },
+          function(_err) {
+            if (!cancelled) setSyncStatus("error");
+          }
+        );
+      } catch(e) {
+        console.warn("Firebase init failed:", e);
+        if (!cancelled) setSyncStatus("local");
+      }
+    }
+
+    loadScript("https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js")
+      .then(function() {
+        return loadScript("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js");
+      })
+      .then(initFirestore)
+      .catch(function(e) {
+        console.warn("Firebase scripts failed to load:", e);
+        if (!cancelled) setSyncStatus("local");
+      });
 
     return function() {
       cancelled = true;
@@ -334,7 +344,7 @@ function VerificationTracker() {
     saveTimer.current = setTimeout(function() {
       var fb = firebaseRef.current;
       if (!fb) return;
-      fb.setDoc(fb.docRef, { modules: modules, savedAt: new Date().toISOString() })
+      fb.docRef.set({ modules: modules, savedAt: new Date().toISOString() })
         .then(function()  { setSyncStatus("synced"); })
         .catch(function() { setSyncStatus("error");  });
     }, 800);
