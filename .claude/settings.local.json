@@ -6,7 +6,13 @@
       "Bash(mv \"Tutorial03_Stdcell v03.pdf\" \"Tutorial04.pdf\")",
       "Bash(mv \"Tutorial04 Block-level APR and SRAM v02.pdf\" \"Tutorial05.pdf\")",
       "Bash(mv \"Tutorial05 Top-level APR v02.pdf\" \"Tutorial06.pdf\")",
-      "Bash(grep -r '$x-large\\\\s*:' '/Users/charlottechen/Library/Mobile Documents/com~apple~CloudDocs/Documents/CharlotteChen2002/_sass/' '--include=*.scss')"
+      "Bash(grep -r '$x-large\\\\s*:' '/Users/charlottechen/Library/Mobile Documents/com~apple~CloudDocs/Documents/CharlotteChen2002/_sass/' '--include=*.scss')",
+      "Bash(npx --yes @babel/core --version)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(python3 -)",
+      "Bash(node_modules/.bin/babel /tmp/tracker-babel.jsx --presets @babel/preset-react,@babel/preset-env --out-file /tmp/tracker-compiled.js)",
+      "Bash(node -e ':*)"
     ]
   }
 }
