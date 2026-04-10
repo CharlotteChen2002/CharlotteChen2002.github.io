@@ -94,40 +94,6 @@ html[data-theme="dark"] {
 
 <div id="tracker-root"></div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     Firebase — cross-device sync
-     ───────────────────────────────────────────────────────────────
-     Setup (one-time):
-       1. Go to https://console.firebase.google.com and create a project.
-       2. Add a Web app inside that project (no hosting needed).
-       3. Copy the firebaseConfig object shown and paste it below.
-       4. In Firestore Database → Rules, set:
-            allow read, write: if true;
-          (fine for a personal tracker — data isn't sensitive)
-     ═══════════════════════════════════════════════════════════════ -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script>
-  window._trackerDoc = null;  // default: local-only mode
-  try {
-    const firebaseConfig = {
-      apiKey:            "AIzaSyC7_2FWrQC6RUrZHMnqDYefwo_DNZTq4rU",
-      authDomain:        "my-page-99b69.firebaseapp.com",
-      projectId:         "my-page-99b69",
-      storageBucket:     "my-page-99b69.firebasestorage.app",
-      messagingSenderId: "992670582379",
-      appId:             "1:992670582379:web:90b41297ff7a3bdcc4d32e",
-    };
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    window._trackerDoc = firebase.firestore()
-                           .collection("trackers").doc("elen6350_v1");
-  } catch (e) {
-    console.warn("Firebase init failed — tracker will run in local-only mode.", e);
-  }
-</script>
-
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -136,8 +102,19 @@ html[data-theme="dark"] {
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
-const STORAGE_KEY  = "elen6350_tracker_v1";
-const trackerDoc   = window._trackerDoc;   // Firestore document reference
+const STORAGE_KEY = "elen6350_tracker_v1";
+
+// Firebase is loaded asynchronously inside the component so it never
+// blocks the initial render. Config is safe to commit — security comes
+// from Firestore rules, not from keeping these values secret.
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyC7_2FWrQC6RUrZHMnqDYefwo_DNZTq4rU",
+  authDomain:        "my-page-99b69.firebaseapp.com",
+  projectId:         "my-page-99b69",
+  storageBucket:     "my-page-99b69.firebasestorage.app",
+  messagingSenderId: "992670582379",
+  appId:             "1:992670582379:web:90b41297ff7a3bdcc4d32e",
+};
 
 /* Map status keys to CSS variable names */
 const STATUS = {
@@ -280,53 +257,86 @@ function VerificationTracker() {
   const [newNote, setNewNote]     = useState("");
   const [editingNote, setEditingNote] = useState(null);
   const [filter, setFilter] = useState("ALL");
-  const [syncStatus, setSyncStatus] = useState(trackerDoc ? "init" : "local");
+  const [syncStatus, setSyncStatus] = useState("connecting");
 
   // Refs to coordinate Firestore ↔ state without infinite loops
-  const isRemoteUpdate = useRef(false);   // true while applying a remote snapshot
-  const saveTimer      = useRef(null);    // debounce handle
+  const isRemoteUpdate = useRef(false);  // true while applying a remote snapshot
+  const saveTimer      = useRef(null);   // debounce handle
+  const firebaseRef    = useRef(null);   // { setDoc, docRef } once Firebase loads
+  const unsubRef       = useRef(null);   // onSnapshot unsubscribe handle
 
-  // ── Subscribe to Firestore on mount ──────────────────────────────
+  // ── Load Firebase asynchronously (never blocks initial render) ────
   useEffect(() => {
-    if (!trackerDoc) return;
+    let cancelled = false;
 
-    const unsub = trackerDoc.onSnapshot(
-      (snap) => {
-        if (snap.exists) {
-          const remote = snap.data().modules;
-          isRemoteUpdate.current = true;
-          setModules(remote);
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(remote)); } catch {}
+    Promise.all([
+      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"),
+    ]).then(function(mods) {
+      var initializeApp = mods[0].initializeApp;
+      var getApps       = mods[0].getApps;
+      var getFirestore  = mods[1].getFirestore;
+      var collection    = mods[1].collection;
+      var doc           = mods[1].doc;
+      var onSnapshot    = mods[1].onSnapshot;
+      var setDoc        = mods[1].setDoc;
+
+      if (cancelled) return;
+
+      var app     = getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG);
+      var db      = getFirestore(app);
+      var docRef  = doc(collection(db, "trackers"), "elen6350_v1");
+
+      firebaseRef.current = { setDoc: setDoc, docRef: docRef };
+
+      unsubRef.current = onSnapshot(
+        docRef,
+        function(snap) {
+          if (cancelled) return;
+          if (snap.exists()) {
+            var remote = snap.data().modules;
+            isRemoteUpdate.current = true;
+            setModules(remote);
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(remote)); } catch(e) {}
+          }
+          setSyncStatus("synced");
+        },
+        function(_err) {
+          if (!cancelled) setSyncStatus("error");
         }
-        setSyncStatus("synced");
-      },
-      (_err) => {
-        setSyncStatus("error");
-      }
-    );
+      );
+    }).catch(function(e) {
+      console.warn("Firebase failed — running in local-only mode.", e);
+      if (!cancelled) setSyncStatus("local");
+    });
 
-    return () => unsub();
+    return function() {
+      cancelled = true;
+      if (unsubRef.current) { unsubRef.current(); unsubRef.current = null; }
+    };
   }, []);
 
-  // ── Write to Firestore (debounced) whenever modules change ───────
+  // ── Write to Firestore (debounced) whenever modules change ────────
   useEffect(() => {
-    // If this update came from Firestore itself, skip the write-back
+    // Skip write-back when this update came from Firestore
     if (isRemoteUpdate.current) {
       isRemoteUpdate.current = false;
       return;
     }
 
     // Always persist locally
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(modules)); } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(modules)); } catch(e) {}
 
-    if (!trackerDoc) return;
+    if (!firebaseRef.current) return;
 
     setSyncStatus("saving");
     clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => {
-      trackerDoc.set({ modules, savedAt: new Date().toISOString() })
-        .then(() => setSyncStatus("synced"))
-        .catch(() => setSyncStatus("error"));
+    saveTimer.current = setTimeout(function() {
+      var fb = firebaseRef.current;
+      if (!fb) return;
+      fb.setDoc(fb.docRef, { modules: modules, savedAt: new Date().toISOString() })
+        .then(function()  { setSyncStatus("synced"); })
+        .catch(function() { setSyncStatus("error");  });
     }, 800);
   }, [modules]);
 
@@ -493,7 +503,7 @@ function VerificationTracker() {
       {/* Footer */}
       <p style={{ fontSize: "11px", color: "var(--tr-muted)", fontFamily: "var(--tr-mono)", marginTop: "8px" }}>
         {modules.length} modules · {totalCells} checkpoints
-        {trackerDoc ? " · synced via Firebase" : " · local only (Firebase not configured)"}
+        {syncStatus !== "local" ? " · synced via Firebase" : " · local only"}
       </p>
     </div>
   );
