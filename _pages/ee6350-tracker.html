@@ -105,25 +105,27 @@ html[data-theme="dark"] {
             allow read, write: if true;
           (fine for a personal tracker — data isn't sensitive)
      ═══════════════════════════════════════════════════════════════ -->
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script>
-  const firebaseConfig = {
-    apiKey:            "AIzaSyC7_2FWrQC6RUrZHMnqDYefwo_DNZTq4rU",
-    authDomain:        "my-page-99b69.firebaseapp.com",
-    projectId:         "my-page-99b69",
-    storageBucket:     "my-page-99b69.firebasestorage.app",
-    messagingSenderId: "992670582379",
-    appId:             "1:992670582379:web:90b41297ff7a3bdcc4d32e",
-  };
-
-  // Initialise only once (safe on hot-reload)
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+  window._trackerDoc = null;  // default: local-only mode
+  try {
+    const firebaseConfig = {
+      apiKey:            "AIzaSyC7_2FWrQC6RUrZHMnqDYefwo_DNZTq4rU",
+      authDomain:        "my-page-99b69.firebaseapp.com",
+      projectId:         "my-page-99b69",
+      storageBucket:     "my-page-99b69.firebasestorage.app",
+      messagingSenderId: "992670582379",
+      appId:             "1:992670582379:web:90b41297ff7a3bdcc4d32e",
+    };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    window._trackerDoc = firebase.firestore()
+                           .collection("trackers").doc("elen6350_v1");
+  } catch (e) {
+    console.warn("Firebase init failed — tracker will run in local-only mode.", e);
   }
-  // Expose db as a global so the Babel script below can reach it
-  window._trackerDb = firebase.firestore();
-  window._trackerDoc = window._trackerDb.collection("trackers").doc("elen6350_v1");
 </script>
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
