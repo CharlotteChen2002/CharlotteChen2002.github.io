@@ -1,0 +1,395 @@
+---
+layout: single
+title: "ELEN 6350 — Verification Tracker"
+permalink: /elen6350/tracker/
+author_profile: false
+---
+
+<style>
+/* Layout: slightly wider than default but not edge-to-edge */
+#main {
+  max-width: 1400px !important;
+  padding-left: 2.5em !important;
+  padding-right: 2.5em !important;
+}
+#main .page {
+  float: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Tracker color tokens — light mode */
+:root {
+  --tr-bg:             var(--global-bg-color);
+  --tr-surface:        #f6f7f8;
+  --tr-border:         var(--global-border-color);
+  --tr-text:           var(--global-text-color);
+  --tr-muted:          #999;
+  --tr-mono:           'SFMono-Regular', 'Consolas', monospace;
+  --tr-accent:         var(--global-base-color);
+
+  --s-none-bg:         #f1f3f5;
+  --s-none-text:       #6b7280;
+  --s-none-border:     #d1d5db;
+
+  --s-prog-bg:         #fffbeb;
+  --s-prog-text:       #b45309;
+  --s-prog-border:     #fde68a;
+
+  --s-pass-bg:         #f0fdf4;
+  --s-pass-text:       #15803d;
+  --s-pass-border:     #bbf7d0;
+
+  --s-fail-bg:         #fef2f2;
+  --s-fail-text:       #b91c1c;
+  --s-fail-border:     #fecaca;
+
+  --s-block-bg:        #faf5ff;
+  --s-block-text:      #7e22ce;
+  --s-block-border:    #e9d5ff;
+}
+
+/* Dark mode overrides */
+html[data-theme="dark"] {
+  --tr-bg:             #474747;
+  --tr-surface:        #3d3d3d;
+  --tr-border:         rgba(255,255,255,0.12);
+  --tr-text:           #f3f3f3;
+  --tr-muted:          #aaa;
+
+  --s-none-bg:         rgba(255,255,255,0.07);
+  --s-none-text:       #9ca3af;
+  --s-none-border:     rgba(255,255,255,0.18);
+
+  --s-prog-bg:         #2d2208;
+  --s-prog-text:       #fbbf24;
+  --s-prog-border:     #78350f;
+
+  --s-pass-bg:         #052e16;
+  --s-pass-text:       #4ade80;
+  --s-pass-border:     #14532d;
+
+  --s-fail-bg:         #2d0a0a;
+  --s-fail-text:       #f87171;
+  --s-fail-border:     #7f1d1d;
+
+  --s-block-bg:        #1e0a36;
+  --s-block-text:      #c084fc;
+  --s-block-border:    #4c1d95;
+}
+
+/* Shared tracker chrome */
+#tracker-root {
+  overflow-x: auto;
+  font-family: var(--global-font-family, -apple-system, sans-serif);
+}
+</style>
+
+<p style="margin-bottom: 20px; color: var(--tr-muted); font-size: 0.9em;">
+  Click any status cell to cycle it. Click a stat card to filter rows.
+  &nbsp;·&nbsp; <a href="/elen6350/">← Back to ELEN 6350</a>
+</p>
+
+<div id="tracker-root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+{% raw %}
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const STORAGE_KEY = "elen6350_tracker_v1";
+
+/* Map status keys to CSS variable names */
+const STATUS = {
+  NOT_STARTED: { label: "Not started", icon: "—",  bg: "var(--s-none-bg)",  text: "var(--s-none-text)",  border: "var(--s-none-border)"  },
+  IN_PROGRESS: { label: "In progress", icon: "◑",  bg: "var(--s-prog-bg)",  text: "var(--s-prog-text)",  border: "var(--s-prog-border)"  },
+  PASS:        { label: "Pass",        icon: "✓",  bg: "var(--s-pass-bg)",  text: "var(--s-pass-text)",  border: "var(--s-pass-border)"  },
+  FAIL:        { label: "Fail",        icon: "✕",  bg: "var(--s-fail-bg)",  text: "var(--s-fail-text)",  border: "var(--s-fail-border)"  },
+  BLOCKED:     { label: "Blocked",     icon: "⊘",  bg: "var(--s-block-bg)", text: "var(--s-block-text)", border: "var(--s-block-border)" },
+};
+const STATUS_ORDER = ["NOT_STARTED", "IN_PROGRESS", "PASS", "FAIL", "BLOCKED"];
+
+const STAGES = [
+  { key: "rtl_sim",      label: "RTL Sim"      },
+  { key: "synthesis",    label: "Synthesis"    },
+  { key: "pnr",          label: "PNR"          },
+  { key: "post_pnr_sim", label: "Post-PNR Sim" },
+  { key: "timing",       label: "Timing"       },
+  { key: "drc_lvs",      label: "DRC/LVS"      },
+];
+
+const DEFAULT_MODULES = [
+  { name: "nbody_top",          notes: "Top-level N-body accelerator" },
+  { name: "pe_array",           notes: "Systolic PE array"            },
+  { name: "processing_element", notes: "Single PE unit"               },
+  { name: "force_lut",          notes: "Force lookup table"           },
+  { name: "fp_adder",           notes: "Fixed-point adder"            },
+  { name: "fp_multiplier",      notes: "Fixed-point multiplier"       },
+  { name: "controller_fsm",     notes: "Main FSM controller"          },
+  { name: "mem_interface",      notes: "Memory interface"             },
+];
+
+const cell = {
+  padding: 0,
+  margin: 0,
+  fontFamily: "var(--tr-mono)",
+  fontSize: "12px",
+};
+
+function StatusBadge({ status, onClick }) {
+  const s = STATUS[status];
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      title="Click to cycle"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "5px",
+        padding: "4px 10px",
+        background: s.bg,
+        color: s.text,
+        border: `1px solid ${s.border}`,
+        borderRadius: "5px",
+        cursor: "pointer",
+        fontFamily: "var(--tr-mono)",
+        fontSize: "12px",
+        fontWeight: 500,
+        whiteSpace: "nowrap",
+        width: "100%",
+        justifyContent: "center",
+        opacity: hovered ? 0.8 : 1,
+        transform: hovered ? "scale(1.02)" : "scale(1)",
+        transition: "opacity 0.1s, transform 0.1s",
+        boxSizing: "border-box",
+      }}
+    >
+      <span style={{ fontSize: "11px", lineHeight: 1 }}>{s.icon}</span>
+      {s.label}
+    </button>
+  );
+}
+
+function StatCard({ label, value, color, active, onClick }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: active ? "var(--tr-surface)" : "var(--tr-bg)",
+        border: `1px solid ${active ? color : "var(--tr-border)"}`,
+        borderRadius: "7px",
+        padding: "12px 16px",
+        cursor: "pointer",
+        textAlign: "left",
+        minWidth: "80px",
+        flex: "0 1 auto",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+        boxShadow: active || hovered ? "0 1px 6px rgba(0,0,0,0.08)" : "none",
+        outline: "none",
+      }}
+    >
+      <div style={{ fontSize: "10px", color: "var(--tr-muted)", fontFamily: "var(--tr-mono)", letterSpacing: "0.05em", marginBottom: "4px", textTransform: "uppercase" }}>
+        {label}
+      </div>
+      <div style={{ fontSize: "22px", fontWeight: 700, fontFamily: "var(--tr-mono)", color: active ? color : "var(--tr-text)" }}>
+        {value}
+      </div>
+    </button>
+  );
+}
+
+function VerificationTracker() {
+  const [modules, setModules] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return DEFAULT_MODULES.map(m => ({ ...m, stages: Object.fromEntries(STAGES.map(s => [s.key, "NOT_STARTED"])) }));
+  });
+  const [newModule, setNewModule] = useState("");
+  const [newNote, setNewNote]     = useState("");
+  const [editingNote, setEditingNote] = useState(null);
+  const [filter, setFilter] = useState("ALL");
+
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(modules)); } catch {}
+  }, [modules]);
+
+  const cycleStatus = (modIdx, stageKey) => {
+    setModules(prev => {
+      const next = [...prev];
+      const curIdx = STATUS_ORDER.indexOf(next[modIdx].stages[stageKey]);
+      next[modIdx] = { ...next[modIdx], stages: { ...next[modIdx].stages, [stageKey]: STATUS_ORDER[(curIdx + 1) % STATUS_ORDER.length] } };
+      return next;
+    });
+  };
+
+  const addModule = () => {
+    if (!newModule.trim()) return;
+    setModules(prev => [...prev, {
+      name: newModule.trim(), notes: newNote.trim(),
+      stages: Object.fromEntries(STAGES.map(s => [s.key, "NOT_STARTED"])),
+    }]);
+    setNewModule(""); setNewNote("");
+  };
+
+  const removeModule = idx => setModules(prev => prev.filter((_, i) => i !== idx));
+
+  const updateNote = (idx, note) => {
+    setModules(prev => { const next = [...prev]; next[idx] = { ...next[idx], notes: note }; return next; });
+    setEditingNote(null);
+  };
+
+  const totalCells   = modules.length * STAGES.length;
+  const counts       = Object.fromEntries(STATUS_ORDER.map(s => [s, 0]));
+  modules.forEach(m => STAGES.forEach(s => counts[m.stages[s.key]]++));
+  const passRate     = totalCells > 0 ? ((counts.PASS / totalCells) * 100).toFixed(0) : 0;
+  const shown        = filter === "ALL" ? modules : modules.filter(m => Object.values(m.stages).some(s => s === filter));
+
+  const thStyle = {
+    padding: "8px 10px",
+    fontSize: "12px",
+    fontFamily: "var(--tr-mono)",
+    fontWeight: 600,
+    letterSpacing: "0.03em",
+    textTransform: "none",
+    color: "var(--tr-text)",
+    borderBottom: "1px solid var(--tr-border)",
+    background: "var(--tr-surface)",
+    textAlign: "center",
+    whiteSpace: "nowrap",
+  };
+
+  const inputStyle = {
+    background: "var(--tr-bg)",
+    border: "1px solid var(--tr-border)",
+    borderRadius: "5px",
+    color: "var(--tr-text)",
+    padding: "7px 11px",
+    fontSize: "13px",
+    fontFamily: "var(--tr-mono)",
+    outline: "none",
+    flex: "1 1 160px",
+  };
+
+  return (
+    <div style={{ color: "var(--tr-text)" }}>
+
+      {/* Progress + stat cards */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", alignItems: "stretch" }}>
+
+        {/* Progress bar card */}
+        <div style={{ background: "var(--tr-surface)", border: "1px solid var(--tr-border)", borderRadius: "7px", padding: "12px 18px", flex: "1 1 140px", minWidth: "130px" }}>
+          <div style={{ fontSize: "10px", color: "var(--tr-muted)", fontFamily: "var(--tr-mono)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "4px" }}>Progress</div>
+          <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--tr-mono)", color: "var(--s-pass-text)" }}>{passRate}%</div>
+          <div style={{ height: "4px", background: "var(--tr-border)", borderRadius: "2px", marginTop: "8px", overflow: "hidden" }}>
+            <div style={{ height: "100%", width: `${passRate}%`, background: "var(--s-pass-text)", borderRadius: "2px", transition: "width 0.4s ease" }} />
+          </div>
+        </div>
+
+        {/* Status filter cards */}
+        {STATUS_ORDER.map(key => (
+          <StatCard
+            key={key}
+            label={STATUS[key].label}
+            value={counts[key]}
+            color={STATUS[key].text}
+            active={filter === key}
+            onClick={() => setFilter(filter === key ? "ALL" : key)}
+          />
+        ))}
+
+        {filter !== "ALL" && (
+          <button onClick={() => setFilter("ALL")} style={{ background: "none", border: "1px solid var(--tr-border)", borderRadius: "7px", padding: "8px 14px", cursor: "pointer", color: "var(--tr-muted)", fontSize: "12px", fontFamily: "var(--tr-mono)", alignSelf: "center" }}>
+            ✕ clear
+          </button>
+        )}
+      </div>
+
+      {/* Table */}
+      <div style={{ overflowX: "auto", borderRadius: "7px", border: "1px solid var(--tr-border)" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "800px" }}>
+          <thead>
+            <tr>
+              <th style={{ ...thStyle, textAlign: "left", paddingLeft: "14px", minWidth: "160px" }}>Module</th>
+              {STAGES.map(s => <th key={s.key} style={thStyle}>{s.label}</th>)}
+              <th style={{ ...thStyle, textAlign: "left", minWidth: "150px" }}>Notes</th>
+              <th style={{ ...thStyle, width: "32px" }} />
+            </tr>
+          </thead>
+          <tbody>
+            {shown.map((mod) => {
+              const ri = modules.indexOf(mod);
+              return (
+                <tr key={ri} style={{ borderBottom: "1px solid var(--tr-border)" }}
+                  onMouseEnter={e => e.currentTarget.style.background = "var(--tr-surface)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                >
+                  <td style={{ padding: "8px 14px", fontFamily: "var(--tr-mono)", fontSize: "13px", fontWeight: 600, color: "var(--tr-text)" }}>
+                    {mod.name}
+                  </td>
+                  {STAGES.map(s => (
+                    <td key={s.key} style={{ padding: "10px 5px", textAlign: "center", verticalAlign: "middle" }}>
+                      <StatusBadge status={mod.stages[s.key]} onClick={() => cycleStatus(ri, s.key)} />
+                    </td>
+                  ))}
+                  <td style={{ padding: "10px 10px", verticalAlign: "middle" }}>
+                    {editingNote === ri ? (
+                      <input autoFocus defaultValue={mod.notes}
+                        onBlur={e => updateNote(ri, e.target.value)}
+                        onKeyDown={e => { if (e.key === "Enter") updateNote(ri, e.target.value); if (e.key === "Escape") setEditingNote(null); }}
+                        style={{ ...inputStyle, flex: "none", width: "100%", padding: "3px 7px" }} />
+                    ) : (
+                      <span onClick={() => setEditingNote(ri)} style={{ fontSize: "12px", color: mod.notes ? "var(--tr-muted)" : "var(--s-none-text)", fontFamily: "var(--tr-mono)", cursor: "pointer", fontStyle: mod.notes ? "normal" : "italic" }}>
+                        {mod.notes || "add note…"}
+                      </span>
+                    )}
+                  </td>
+                  <td style={{ padding: "10px 8px", textAlign: "center", verticalAlign: "middle" }}>
+                    <button onClick={() => removeModule(ri)} title="Remove"
+                      style={{ background: "none", border: "none", cursor: "pointer", color: "var(--tr-muted)", fontSize: "16px", padding: "2px 5px", borderRadius: "4px", lineHeight: 1 }}
+                      onMouseEnter={e => { e.currentTarget.style.color = "var(--s-fail-text)"; }}
+                      onMouseLeave={e => { e.currentTarget.style.color = "var(--tr-muted)"; }}>
+                      ×
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Add row */}
+      <div style={{ display: "flex", gap: "8px", alignItems: "center", marginTop: "10px", padding: "8px 0" }}>
+        <span style={{ color: "var(--s-pass-text)", fontSize: "16px", flexShrink: 0 }}>+</span>
+        <input value={newModule} onChange={e => setNewModule(e.target.value)} onKeyDown={e => e.key === "Enter" && addModule()} placeholder="module_name" style={inputStyle} />
+        <input value={newNote}   onChange={e => setNewNote(e.target.value)}   onKeyDown={e => e.key === "Enter" && addModule()} placeholder="notes (optional)" style={inputStyle} />
+        <button onClick={addModule} style={{ background: "var(--tr-surface)", border: "1px solid var(--tr-border)", borderRadius: "5px", color: "var(--tr-text)", padding: "7px 16px", cursor: "pointer", fontSize: "13px", fontFamily: "var(--tr-mono)", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}>
+          Add
+        </button>
+      </div>
+
+      {/* Footer */}
+      <p style={{ fontSize: "11px", color: "var(--tr-muted)", fontFamily: "var(--tr-mono)", marginTop: "8px" }}>
+        {modules.length} modules · {totalCells} checkpoints
+      </p>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("tracker-root"));
+root.render(<VerificationTracker />);
+</script>
+{% endraw %}

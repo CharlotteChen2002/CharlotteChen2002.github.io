@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv \"Tutorial02 HSPICE v02.pdf\" \"Tutorial02.pdf\")",
+      "Bash(mv \"Tutorial02 Verilog Synthesis STA v2.pdf\" \"Tutorial03.pdf\")",
+      "Bash(mv \"Tutorial03_Stdcell v03.pdf\" \"Tutorial04.pdf\")",
+      "Bash(mv \"Tutorial04 Block-level APR and SRAM v02.pdf\" \"Tutorial05.pdf\")",
+      "Bash(mv \"Tutorial05 Top-level APR v02.pdf\" \"Tutorial06.pdf\")",
+      "Bash(grep -r '$x-large\\\\s*:' '/Users/charlottechen/Library/Mobile Documents/com~apple~CloudDocs/Documents/CharlotteChen2002/_sass/' '--include=*.scss')"
+    ]
+  }
+}
