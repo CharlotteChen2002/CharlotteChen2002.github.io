@@ -13,7 +13,7 @@ title                    : "Charlotte Chen"
 title_separator          : "-"
 name                     : &name "Charlotte Chen"
 description              : &description "personal description"
-url                      : https://charlottechen2002.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
+url                      : https://charlottechen2002.com # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "CharlotteChen2002/CharlotteChen2002"
 
