@@ -46,6 +46,7 @@ Content is organized into Jekyll collections. Each collection maps to a director
 | `_elen6350/` | custom | ELEN 6350 course materials (tutorials, tracker) |
 
 **Key config files:**
+
 - `_config.yml` — site-wide settings: author info, URL, plugins, collection definitions, layout defaults
 - `_data/navigation.yml` — controls which links appear in the top nav bar and their order
 - `_data/cv.json` — structured CV data used by the JSON-generated CV page

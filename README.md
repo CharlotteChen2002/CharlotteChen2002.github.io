@@ -1,9 +1,10 @@
 # Academic Pages
+
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 
 ![Academic Pages template example](images/themes/homepage-light.png "Academic Pages template example")
 
-# Getting Started
+## Getting Started
 
 1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
 1. Click the "Use this template" button in the top right.
@@ -13,12 +14,13 @@
 1. Check status by going to the repository settings, in the "GitHub pages" section
 1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
 
-See more info at https://academicpages.github.io/
+See more info at [academicpages.github.io](https://academicpages.github.io/).
 
-### Additional Tutorials
+## Additional Tutorials
 
 Additional tutorials for working with the Academic Pages template can be found at the following sites:
-- https://jayrobwilliams.com/posts/2020/06/academic-website/
+
+- [Jay Rob Williams: Academic Website](https://jayrobwilliams.com/posts/2020/06/academic-website/)
 
 ## Running locally
 
@@ -27,6 +29,7 @@ When you are initially working on your website, it is very useful to be able to 
 1. Clone the repository and made updates as detailed above.
 
 ### Using a different IDE
+
 1. Make sure you have ruby-dev, bundler, and nodejs installed
     
     On most Linux distributions and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
@@ -76,7 +79,7 @@ You should now be able to access the website from `localhost:4000`.
 
 If you are using [Visual Studio Code](https://code.visualstudio.com/) you can use the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) that comes with this Repository. Normally VS Code detects that a development container configuration is available and asks you if you want to use the container. If this doesn't happen you can manually start the container by **F1->DevContainer: Reopen in Container**. This restarts your VS Code in the container and automatically hosts your academic page locally on http://localhost:4000. All changes will be updated live to that page after a few seconds.
 
-# Maintenance
+## Maintenance
 
 Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
 
