@@ -7,58 +7,27 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! **Charlotte Chen** is a forth-year undergraduate in the Department of Computer Engineering at Columbia University. She received her B.A. in Computer Science and Japanese from Grinnell College in 2025 and is pursuing a B.S. in Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. You can find her coursework [here](/coursework/).
-
-Check out her blog [here](http://charlottechen.blog).
+Welcome! **Charlotte Chen** is a fourth-year undergraduate in the Department of Computer Engineering at Columbia University's Fu Foundation School of Engineering and Applied Science. She received her B.A. in Computer Science and Japanese from Grinnell College in 2024 and is pursuing a B.S. in Computer Engineering at Columbia (expected May 2026). You can find her coursework [here](/coursework/).
 
 <hr>
 
 Research Interests
 ======
-- Computer Architecture
-- Hardware Acceleration
-- System on Chip (SoC) Design
-- Hardware Security
+- Computer Architecture: Domain-Specific Accelerators, Power-Performance Characterization, Hardware-Software Co-Design
+- SoC Design: Heterogeneous SoC Integration, Design-Space Exploration, RTL-to-Silicon Implementation
 
 <hr>
 
 News and Updates
 ======
-- **Feb 2025**: I started my research project at Columbia University, working with Prof. Sethumadhavan, Simha and Annie Peng on Jetson Nano power and performance analysis.
+- **Jan. 2026**: Started the TSMC 65nm N-body Simulation Accelerator tape-out project at Columbia, targeting a 1mm² reconfigurable systolic array for particle interaction offload.
 
-- **May 2024**: I started my research internship at the Univeristy of Minnesota, Twin Cities, working with Prof. Yang (Katie) Zhao and Prof. WenKai Guan on lower carbon datacenter operations research.
+- **Sept. 2025**: Serving as Teaching Assistant for [CSEE 4824 Computer Architecture](https://www.cs.columbia.edu/~martha/courses/4824/sp25/index.html) and Laboratory Assistant for ELEN 3081 Circuit Analysis Lab at Columbia University.
 
-- **May 2024**: I finished my study at Grinnell College and started my engineering study at Columbia University.
+- **Jan. 2025**: Designing a 32-bit superscalar out-of-order RV32IM processor in SystemVerilog (P6/R10K microarchitecture) as a semester-long hardware design project at Columbia.
 
-<hr>
+- **Jan. 2025**: Started power and performance research on NVIDIA Jetson Nano SoC architectures with [Prof. Simha Sethumadhavan](https://www.cs.columbia.edu/~simha/) and mentor Annie Peng at Columbia University.
 
-Independent Exploration
-======
-- **CCMA**: I am learning towards clinical medical assistant certification.
+- **May 2024**: Started research at the University of Minnesota, Twin Cities, working with [Prof. Yang (Katie) Zhao](https://cse.umn.edu/ece/yang-katie-zhao) and Prof. WenKai Guan on lower-carbon datacenter operations (GreenerSKU).
 
-
-
-
-<!-- Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
-
-Create content & metadata
-------
-For site content, there is one markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
-
-**Markdown generator**
-
-I have also created [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the markdown files, then commit and push them to the GitHub repository.
-
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
-
-Example: editing a markdown file for a talk
-![Editing a markdown file for a talk](/images/editing-talk.png)
-
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful. -->
+- **May 2024**: Graduated from Grinnell College with a B.A. in Computer Science and Japanese; joined Columbia University.

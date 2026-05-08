@@ -1,14 +1,15 @@
 ---
-title: "Paper Title Number 1"
+title: "Power and Performance Analysis of GPU under DVFS"
 collection: publications
-category: manuscripts
-permalink: /publication/2009-10-01-paper-title-number-1
-excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
-date: 2009-10-01
-venue: 'Journal 1'
-slidesurl: 'https://academicpages.github.io/files/slides1.pdf'
-paperurl: 'https://academicpages.github.io/files/paper1.pdf'
-bibtexurl: 'https://academicpages.github.io/files/bibtex1.bib'
-citation: 'Your Name, You. (2009). &quot;Paper Title Number 1.&quot; <i>Journal 1</i>. 1(1).'
+category: presentations
+permalink: /publication/2025-gpu-dvfs
+excerpt: 'Empirical characterization of NVIDIA Jetson Nano GPU power-performance tradeoffs across DVFS operating points, using hardware performance counters and targeted microbenchmarks to establish energy-delay product baselines.'
+date: 2025-05-01
+venue: 'University Research Presentation, Columbia University'
+slidesurl: '/files/GPU DVFS.pdf'
+citation: 'Charlotte Chen. (2025). &quot;Power and Performance Analysis of GPU under DVFS.&quot; <i>University Research Presentation, Columbia University</i>, Spring 2025.'
 ---
-The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
+
+This presentation reports on empirical power-performance characterization of the NVIDIA Jetson Nano platform under dynamic voltage and frequency scaling (DVFS). Using hardware performance counters and targeted CPU/GPU microbenchmarks, we characterized energy-delay product (EDP) tradeoffs across heterogeneous compute units, quantifying DVFS sensitivity and power-gating efficiency from measured hardware data.
+
+[Download Slides](/files/GPU DVFS.pdf){: .btn .btn--info}

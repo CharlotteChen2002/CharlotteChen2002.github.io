@@ -1,152 +1,123 @@
 {
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
-    "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
+    "name": "Charlotte Chen",
+    "email": "hc3558@columbia.edu",
+    "phone": "(641) 387-8690",
+    "website": "https://charlottechen2002.com",
+    "summary": "Fourth-year undergraduate in Computer Engineering at Columbia University. Research interests in computer architecture, domain-specific accelerators, and SoC design.",
     "location": {
-      "address": "",
-      "postalCode": "",
-      "city": "Earth",
+      "city": "New York",
       "countryCode": "US",
-      "region": ""
+      "region": "NY"
     },
     "profiles": [
       {
         "network": "Google Scholar",
-        "username": "",
-        "url": "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
-      },
-      {
-        "network": "ORCID",
-        "username": "",
-        "url": "https://orcid.org/yourorcidurl"
+        "username": "Charlotte Chen",
+        "url": "https://scholar.google.com/citations?hl=en&user=lnK_Ja8AAAAJ"
       },
       {
         "network": "GitHub",
-        "username": "academicpages",
-        "url": "https://github.com/academicpages"
+        "username": "CharlotteChen2002",
+        "url": "https://github.com/CharlotteChen2002"
       }
     ]
   },
-  "work": [],
   "education": [
     {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
-      "gpa": null,
-      "courses": []
+      "institution": "Columbia University",
+      "area": "B.S. in Computer Engineering",
+      "studyType": "B.S.",
+      "startDate": "2024-09-01",
+      "endDate": "2026-05-01",
+      "gpa": "3.86",
+      "courses": ["VLSI Design Lab (Tapeout)", "Computer Architecture", "SoC Platforms", "Advanced Logic Design"]
     },
     {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
+      "institution": "Grinnell College",
+      "area": "B.A. in Computer Science, B.A. in Japanese",
+      "studyType": "B.A.",
+      "startDate": "2021-08-01",
+      "endDate": "2024-05-01",
+      "gpa": "3.96",
       "courses": []
     }
   ],
-  "skills": [],
-  "languages": [],
-  "interests": [],
-  "references": [],
+  "work": [
+    {
+      "company": "Columbia University",
+      "position": "Undergraduate Researcher — SoC Power & Performance",
+      "website": "https://www.cs.columbia.edu/~simha/",
+      "startDate": "2025-01-01",
+      "endDate": "",
+      "summary": "Advisor: Prof. Simha Sethumadhavan; Mentor: Annie Peng. Characterizing NVIDIA Jetson Nano SoC and GPU power-performance behavior via hardware performance counters and targeted microbenchmarks."
+    },
+    {
+      "company": "University of Minnesota Twin Cities",
+      "position": "Undergraduate Research Assistant — GreenerSKU",
+      "website": "https://cse.umn.edu/ece/yang-katie-zhao",
+      "startDate": "2024-05-01",
+      "endDate": "",
+      "summary": "PI: Prof. Yang Katie Zhao. Developing a datacenter carbon emission simulation framework to quantify the effects of workload scheduling and cooling strategies on carbon footprint."
+    },
+    {
+      "company": "NC State University",
+      "position": "Undergraduate Research Assistant — Autonomous Driving",
+      "website": "",
+      "startDate": "2023-12-01",
+      "endDate": "2024-04-01",
+      "summary": "PI: Prof. Nuria González-Prelcic. Hardware-in-the-loop path-planning systems; measured TTC margins and algorithmic latency across real-world driving scenarios."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Hardware Description & Verification",
+      "keywords": ["SystemVerilog", "Verilog", "UVM", "JasperGold", "VCS", "Verdi"]
+    },
+    {
+      "name": "EDA Tools",
+      "keywords": ["Synopsys Design Compiler", "PrimeTime", "Cadence Innovus", "Virtuoso", "Vivado"]
+    },
+    {
+      "name": "Architectures & Simulators",
+      "keywords": ["RISC-V", "ESP SoC Platform", "ModelSim", "gem5"]
+    },
+    {
+      "name": "Programming",
+      "keywords": ["C/C++", "Python", "NumPy", "pandas", "matplotlib", "Java", "TCL", "Bash"]
+    }
+  ],
   "publications": [
     {
-      "name": "Paper Title Number 1",
-      "publisher": "Journal 1",
-      "releaseDate": "2009-10-01",
-      "website": "https://academicpages.github.io/files/paper1.pdf",
-      "summary": "This paper is about the number 1. The number 2 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 2",
-      "publisher": "Journal 1",
-      "releaseDate": "2010-10-01",
-      "website": "https://academicpages.github.io/files/paper2.pdf",
-      "summary": "This paper is about the number 2. The number 3 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 3",
-      "publisher": "Journal 1",
-      "releaseDate": "2015-10-01",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about the number 3. The number 4 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 4",
-      "publisher": "GitHub Journal of Bugs",
-      "releaseDate": "2024-02-17",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about fixing template issue #693."
-    }
-  ],
-  "presentations": [
-    {
-      "name": "Talk 1 on Relevant Topic in Your Field",
-      "event": "UC San Francisco, Department of Testing",
-      "date": "2012-03-01",
-      "location": "San Francisco, CA, USA",
-      "description": ""
-    },
-    {
-      "name": "Tutorial 1 on Relevant Topic in Your Field",
-      "event": "UC-Berkeley Institute for Testing Science",
-      "date": "2013-03-01",
-      "location": "Berkeley, CA, USA",
-      "description": ""
-    },
-    {
-      "name": "Talk 2 on Relevant Topic in Your Field",
-      "event": "London School of Testing",
-      "date": "2014-02-01",
-      "location": "London, UK",
-      "description": ""
-    },
-    {
-      "name": "Conference Proceeding talk 3 on Relevant Topic in Your Field",
-      "event": "Testing Institute of America 2014 Annual Conference",
-      "date": "2014-03-01",
-      "location": "Los Angeles, CA, USA",
-      "description": ""
+      "name": "Power and Performance Analysis of GPU under DVFS",
+      "publisher": "University Research Presentation, Columbia University",
+      "releaseDate": "2025-05-01",
+      "website": "/files/GPU DVFS.pdf",
+      "summary": "Empirical characterization of NVIDIA Jetson Nano GPU power-performance tradeoffs across DVFS operating points."
     }
   ],
   "teaching": [
     {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
-      "description": ""
+      "course": "CSEE 4824 - Computer Architecture",
+      "institution": "Columbia University",
+      "date": "2025-09-01",
+      "role": "Teaching Assistant",
+      "description": "Weekly office hours; assisted with architectural measurement, out-of-order execution, cache behavior, and hardware-software interaction topics."
     },
     {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
-      "description": ""
+      "course": "ELEN 3081 - Circuit Analysis Laboratory",
+      "institution": "Columbia University",
+      "date": "2025-09-01",
+      "role": "Laboratory Assistant",
+      "description": "Guided students through HSPICE simulation, circuit measurement, and analog circuit analysis."
+    },
+    {
+      "course": "CSC 211 - Computer Architecture and Organization",
+      "institution": "Grinnell College",
+      "date": "2024-01-01",
+      "role": "Course Monitor",
+      "description": "Monitored and assisted students with computer architecture fundamentals."
     }
   ],
-  "portfolio": [
-    {
-      "name": "Portfolio item number 1",
-      "category": "portfolio",
-      "date": "",
-      "url": "",
-      "description": "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
-    }
-  ]
+  "portfolio": []
 }
