@@ -30,16 +30,14 @@ Single line blockquote:
 | --------         | ------ | ------------------------------------------------------------ |
 | John Doe         | 2016   | Description of the item in the list                          |
 | Jane Doe         | 2019   | Description of the item in the list                          |
-| [Doe Doe](#)     | 2022   | Description of the item in the list                          |
+| Doe Doe          | 2022   | Description of the item in the list                          |
 
 | Header1 | Header2 | Header3 |
 |:--------|:-------:|--------:|
 | cell1   | cell2   | cell3   |
 | cell4   | cell5   | cell6   |
-|-----------------------------|
 | cell1   | cell2   | cell3   |
 | cell4   | cell5   | cell6   |
-|=============================|
 | Foot1   | Foot2   | Foot3   |
 
 ## Definition Lists
@@ -50,7 +48,7 @@ Definition List Title
 Startup
 :   A startup company or startup is a company or temporary organization designed to search for a repeatable and scalable business model.
 
-#dowork
+\#dowork
 :   Coined by Rob Dyrdek and his personal body guard Christopher "Big Black" Boykins, "Do Work" works as a self motivator, to motivating your friends.
 
 Do It Live
@@ -58,18 +56,18 @@ Do It Live
 
 ## Unordered Lists (Nested)
 
-  * List item one 
-      * List item one 
-          * List item one
-          * List item two
-          * List item three
-          * List item four
-      * List item two
-      * List item three
-      * List item four
+* List item one
+  * List item one
+    * List item one
+    * List item two
+    * List item three
+    * List item four
   * List item two
   * List item three
   * List item four
+* List item two
+* List item three
+* List item four
 
 ## Ordered List (Nested)
 
