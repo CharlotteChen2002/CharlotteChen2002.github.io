@@ -13,15 +13,15 @@ redirect_from:
 
 ---
 
-Research Interests
-======
+## Research Interests
+
 **Computer Architecture**: Domain-specific accelerators, power-performance characterization, hardware-software co-design  
 **SoC Design**: Heterogeneous SoC integration, design-space exploration, RTL-to-silicon implementation
 
 ---
 
-Education
-======
+## Education
+
 * **B.S. in Computer Engineering**, Columbia University — Major GPA: 3.86/4.0 *(expected May 2026)*
   * Dean's List; Tau Beta Pi Honor Society
   * Relevant Coursework: VLSI Design Lab (Tapeout), Computer Architecture, SoC Platforms, Advanced Logic Design
@@ -30,8 +30,8 @@ Education
 
 ---
 
-Research Experience
-======
+## Research Experience
+
 * **Power and Performance Analysis of SoC Architectures** *(Jan. 2025 – Present)*
   * Undergraduate Researcher, Columbia University
   * Advisor: Prof. Simha Sethumadhavan; Mentor: Annie Peng
@@ -52,16 +52,16 @@ Research Experience
 
 ---
 
-Publications & Presentations
-======
+## Publications & Presentations
+
 <ul>{% for post in site.publications reversed %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
 
 ---
 
-Selected Hardware & Architecture Projects
-======
+## Selected Hardware & Architecture Projects
+
 * **TSMC 65nm Tape-Out: N-body Simulation Accelerator** — Verilog, Innovus, PrimeTime *(Jan. 2026 – Present)*
   * Architected a 1mm² reconfigurable systolic array with four parallel PEs targeting O(N²) particle interaction offload from host CPU at 100 MHz, <50 mW.
   * Implemented a programmable LUT force engine (updatable via SPI) supporting gravitational and Lennard-Jones potentials.
@@ -84,16 +84,16 @@ Selected Hardware & Architecture Projects
 
 ---
 
-Teaching Experience
-======
+## Teaching Experience
+
 <ul>{% for post in site.teaching reversed %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
 
 ---
 
-Technical Skills
-======
+## Technical Skills
+
 * **Hardware Description & Verification**: SystemVerilog, Verilog, UVM, JasperGold, VCS, Verdi
 * **EDA Tools**: Synopsys Design Compiler, PrimeTime, Cadence Innovus, Virtuoso, Vivado
 * **Architectures & Simulators**: RISC-V, ESP SoC Platform, ModelSim, gem5
@@ -101,7 +101,7 @@ Technical Skills
 
 ---
 
-Grants & Funding
-======
+## Grants & Funding
+
 * **UROP Grant** — University of Minnesota *(May 2024)*: Awarded $2,500 to fund datacenter carbon modeling research (Co-I: Senecy Zhang).
 * **Student Research Fund** — Grinnell College *(March 2023)*: Awarded $4,000 for independent academic research.
