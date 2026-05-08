@@ -12,7 +12,21 @@
       "Bash(npm install:*)",
       "Bash(python3 -)",
       "Bash(node_modules/.bin/babel /tmp/tracker-babel.jsx --presets @babel/preset-react,@babel/preset-env --out-file /tmp/tracker-compiled.js)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "Bash(python3 -c ':*)",
+      "Bash(bundle exec:*)",
+      "WebFetch(domain:charlottechen2002.com)",
+      "Bash(git -C /Users/hibiki/Documents/CharlotteChen2002 status)",
+      "Bash(git -C /Users/hibiki/Documents/CharlotteChen2002 diff _config.yml)",
+      "Bash(git *)",
+      "WebFetch(domain:docs.github.com)",
+      "Bash(dig charlottechen2002.com A +short)",
+      "Bash(dig charlottechen2002.com AAAA +short)",
+      "Bash(dig www.charlottechen2002.com CNAME +short)",
+      "Bash(gh release *)",
+      "Bash(npx --yes markdownlint-cli2 --version)",
+      "Bash(npx markdownlint-cli2 *)",
+      "Read(//Users/charlottechen/Library/Mobile Documents/com~apple~CloudDocs/Documents/CharlotteChenblog/**)"
     ]
   }
 }
