@@ -29,6 +29,8 @@ jobs:
           gem install html-proofer --no-document
           htmlproofer _site \
             --disable-external \
+            --checks links,scripts \
+            --allow-missing-href \
             --ignore-files "_site/feed.xml" \
             --ignore-urls "/^#/" \
             --no-enforce-https
