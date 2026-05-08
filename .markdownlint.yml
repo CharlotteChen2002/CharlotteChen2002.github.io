@@ -1,0 +1,10 @@
+default: true
+
+# Jekyll front matter means files don't start with a heading
+MD041: false
+
+# Academic content often includes raw HTML (figures, iframes, etc.)
+MD033: false
+
+# Long lines are common in academic prose — don't enforce a max
+MD013: false

@@ -1,0 +1,29 @@
+name: Lint Markdown
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: |
+            _posts/**/*.md
+            _pages/**/*.md
+            _portfolio/**/*.md
+            _teaching/**/*.md
+            _publications/**/*.md
+            _talks/**/*.md
+            *.md

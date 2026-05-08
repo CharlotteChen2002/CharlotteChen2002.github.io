@@ -1,0 +1,37 @@
+name: Check Links
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.4"
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Check internal links with HTMLProofer
+        run: |
+          gem install html-proofer --no-document
+          htmlproofer _site \
+            --disable-external \
+            --ignore-files "_site/feed.xml" \
+            --ignore-urls "/^#/" \
+            --no-enforce-https
