@@ -11,7 +11,6 @@ location: "Grinnell, IA"
 This [course](https://curtsinger.cs.grinnell.edu/teaching/2024S/CSC211) was taught by Professor Charlie Curtsinger in the Spring of 2024 at Grinnell College.
 This course covers the fundamental concepts of computer architecture and organization, providing students with a comprehensive understanding of hardware and system-level design.
 
-
 ## Course Overview
 
 CSC 211 explores the essential elements of computer architecture and organization, including CPU design, memory hierarchy, and input/output mechanisms.
@@ -26,4 +25,3 @@ CSC 211 explores the essential elements of computer architecture and organizatio
 ## Teaching Experience
 
 In this course, I have facilitated student learning by monitoring their progress and providing assistance with complex topics, ensuring a thorough comprehension of computer architecture principles.
-

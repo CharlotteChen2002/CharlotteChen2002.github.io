@@ -9,6 +9,7 @@ Charlotte Chen's personal academic website, built on the [Academic Pages](https:
 ## Local Development
 
 **Prerequisites (macOS):**
+
 ```bash
 brew install ruby node
 gem install bundler
@@ -16,12 +17,15 @@ bundle install
 ```
 
 **Serve locally (live-reload):**
+
 ```bash
 bundle exec jekyll serve -l -H localhost
 ```
+
 Site runs at `http://localhost:4000`. Changes to `_config.yml` require a server restart; all other file changes rebuild automatically.
 
 **Using Docker instead:**
+
 ```bash
 chmod -R 777 .
 docker compose up
@@ -32,7 +36,7 @@ docker compose up
 Content is organized into Jekyll collections. Each collection maps to a directory of Markdown files with YAML front matter:
 
 | Directory | URL path | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | `_pages/` | various | Static pages (About, CV, Coursework, etc.) |
 | `_portfolio/` | `/portfolio/` | Research & project entries |
 | `_teaching/` | `/teaching/` | TA/mentorship positions |
