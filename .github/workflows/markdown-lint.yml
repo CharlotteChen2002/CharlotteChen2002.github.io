@@ -6,18 +6,15 @@ on:
   pull_request:
     branches: ["master"]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Lint Markdown files
-        uses: DavidAnson/markdownlint-cli2-action@v18
+        uses: DavidAnson/markdownlint-cli2-action@v23
         with:
           globs: |
             _posts/**/*.md

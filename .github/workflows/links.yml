@@ -6,15 +6,12 @@ on:
   pull_request:
     branches: ["master"]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   link-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
