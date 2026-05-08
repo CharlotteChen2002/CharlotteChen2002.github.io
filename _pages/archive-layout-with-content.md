@@ -6,7 +6,7 @@ permalink: /archive-layout-with-content/
 
 A variety of common markup showing how the theme styles them.
 
-# Header one
+## Header one
 
 ## Header two
 
@@ -28,8 +28,8 @@ Single line blockquote:
 
 | Entry            | Item   |                                                              |
 | --------         | ------ | ------------------------------------------------------------ |
-| [John Doe](#)    | 2016   | Description of the item in the list                          |
-| [Jane Doe](#)    | 2019   | Description of the item in the list                          |
+| John Doe         | 2016   | Description of the item in the list                          |
+| Jane Doe         | 2019   | Description of the item in the list                          |
 | [Doe Doe](#)     | 2022   | Description of the item in the list                          |
 
 | Header1 | Header2 | Header3 |
