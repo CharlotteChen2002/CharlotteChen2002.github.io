@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.2",
-    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-react": "^8.0.1",
     "onchange": "^7.1.0",
     "uglify-js": "^3.17.4"
   },
