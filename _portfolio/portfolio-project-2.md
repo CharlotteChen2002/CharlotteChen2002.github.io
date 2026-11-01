@@ -1,5 +1,6 @@
 ---
 title: "CS61CPU"
+order: 20
 excerpt: "
 <img src='/images/CS61CPU.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong><br/>

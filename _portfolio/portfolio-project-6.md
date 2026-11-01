@@ -1,5 +1,6 @@
 ---
 title: "64-Tap 16-Bit FIR Filter with Dual-Clock Architecture"
+order: 60
 excerpt: "
 <img src='/images/fir_arch.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong><br/>

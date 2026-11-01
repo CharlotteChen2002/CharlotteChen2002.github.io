@@ -1,5 +1,6 @@
 ---
 title: "Chinese Literature in Japanese School Research"
+order: 20
 excerpt: "
 <img src='/images/japaneseResearch.jpeg' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong><br/>

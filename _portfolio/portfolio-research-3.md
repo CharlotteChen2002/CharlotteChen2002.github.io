@@ -1,5 +1,6 @@
 ---
 title: "Recycled Server Lifespan Analysis for Reducing Embodied Carbon"
+order: 30
 excerpt: "
 <img src='/images/greendata.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <a href='https://cse.umn.edu/ece/yang-katie-zhao' target='_blank' style='text-decoration: none;'>Yang (Katie) Zhao</a>, WenKai Guan, <strong><u>Charlotte Chen</u></strong>, Senecy Zhang<br/>

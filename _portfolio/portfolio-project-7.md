@@ -1,5 +1,6 @@
 ---
 title: "Microprocessor Core Design and Layout (TSMC N65)"
+order: 70
 excerpt: "
 <img src='/images/n65_core.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong>, Ming Gong<br/> 

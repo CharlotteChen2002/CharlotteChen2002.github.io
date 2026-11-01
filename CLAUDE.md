@@ -57,7 +57,7 @@ Content is organized into Jekyll collections. Each collection maps to a director
 
 ## Adding Content
 
-- **New portfolio project:** create `_portfolio/portfolio-project-N.md` with front matter (`title`, `excerpt`, `header.teaser`, `collection: portfolio`)
+- **New portfolio project:** create `_portfolio/portfolio-project-N.md` (or `portfolio-research-N.md`) with front matter (`title`, `order`, `excerpt`, `collection: portfolio`). The Research & Projects page lists entries by `order`, highest first, so set it relative to the existing entries rather than relying on the file number
 - **New teaching entry:** create `_teaching/YYYY-semester-role-N.md`
 - **New nav link:** add an entry under `main:` in `_data/navigation.yml`
 - **CV file:** replace `files/CharlotteChenCV.pdf`; the CV link in nav points directly to this file

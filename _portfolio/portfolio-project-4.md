@@ -1,5 +1,6 @@
 ---
 title: "Convolutional Accelerator on SoC Platforms" 
+order: 40
 excerpt: " 
 <img src='/images/convolution_layer.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' /> 
 <strong><u>Charlotte Chen</u></strong>, Nissy Zhou<br/> 

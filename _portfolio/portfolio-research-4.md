@@ -1,5 +1,6 @@
 ---
 title: "Computer Architecture Level Large Data Optimization"
+order: 40
 excerpt: "
 <img src='/images/largedata.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong>, Jill Kang, Tianyun Huang, Yu Jia<br/> 

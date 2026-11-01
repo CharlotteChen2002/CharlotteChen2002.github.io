@@ -1,5 +1,6 @@
 ---
 title: "Jetson Nano Power and Performance Analysis"
+order: 50
 excerpt: "
 <img src='/images/GPUDVFS.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong>, Annie Peng<br/> 

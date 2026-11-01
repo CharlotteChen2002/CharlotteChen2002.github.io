@@ -1,5 +1,6 @@
 ---
 title: "End-to-End Encrypted File Sharing System" 
+order: 50
 excerpt: " 
 <img src='/images/EtoE.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
  <strong><u>Charlotte Chen</u></strong><br/> 

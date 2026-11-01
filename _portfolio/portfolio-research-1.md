@@ -1,5 +1,6 @@
 ---
 title: "Stats2Lab Software Development Research"
+order: 10
 excerpt: "
 <img src='/images/stat2labs.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <a href='https://www.grinnell.edu/user/kuipers' target='_blank' style='text-decoration: none;'>Shonda Kuiper</a>, <strong><u>Charlotte Chen</u></strong>, Ruipeng Deng<br/>

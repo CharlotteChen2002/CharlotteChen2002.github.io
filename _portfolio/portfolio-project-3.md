@@ -1,5 +1,6 @@
 ---
 title: "NUMC"
+order: 30
 excerpt: "
 <img src='/images/numc.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong><br/>

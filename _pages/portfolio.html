@@ -5,10 +5,13 @@ permalink: /portfolio/
 author_profile: true
 ---
 
+{% comment %} Highest `order` first; set `order` in each _portfolio entry. {% endcomment %}
+{% assign portfolio_sorted = site.portfolio | sort: "order" %}
+
 <h2>Research</h2>
 {% include base_path %}
 
-{% for post in site.portfolio reversed %}
+{% for post in portfolio_sorted reversed %}
 {% if post.path contains "research" %}
 {% include archive-single.html %}
 {% endif %}
@@ -20,7 +23,7 @@ author_profile: true
 <h2>Projects</h2>
 {% include base_path %}
 
-{% for post in site.portfolio reversed %}
+{% for post in portfolio_sorted reversed %}
 {% if post.path contains "project" %}
 {% include archive-single.html %}
 {% endif %}
