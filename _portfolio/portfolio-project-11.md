@@ -2,6 +2,7 @@
 title: "TSMC 65nm Tape-Out: N-Body Simulation Accelerator"
 order: 100
 excerpt: "
+<img src='/images/6350_chip.png' style='float: left; margin-right: 15px; width: 400px; height: auto;' />
 <strong><u>Charlotte Chen</u></strong> (team of 4)<br/>
 <span style='font-size: 0.9em;'><em>ELEN 6350 VLSI Design Laboratory, Columbia University</em>, Jan. 2026 – Present</span><br/>
 <span style='font-size: 0.9em;'>
